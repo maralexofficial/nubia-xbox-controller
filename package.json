@@ -1,0 +1,14 @@
+{
+"name": "xbox-api",
+"version": "1.0.0",
+"private": true,
+"description": "REST API zur Steuerung einer Xbox One S über SmartGlass",
+"main": "api.js",
+"scripts": {
+"start": "node api.js"
+},
+"dependencies": {
+"express": "^5.1.0",
+"xbox-smartglass-core-node": "github:OpenXbox/xbox-smartglass-core-node"
+}
+}
