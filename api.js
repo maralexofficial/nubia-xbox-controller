@@ -10,6 +10,7 @@ const app = express();
 app.use(express.json());
 
 const XBOX_IP = process.env.XBOX_IP;
+const HOST = '0.0.0.0';
 const PORT = Number(process.env.PORT) || 8787;
 
 console.log('Konfiguration:', {
@@ -61,6 +62,7 @@ app.get('/xbox/status', (req, res) => {
     );
 });
 
-app.listen(PORT, '127.0.0.1', () => {
-    console.log(`Xbox API läuft auf http://127.0.0.1:${PORT}`);
+app.listen(PORT, HOST, () => {
+    console.log(`Xbox API läuft auf Port ${PORT}`);
+    console.log(`Lokal: http://127.0.0.1:${PORT}`);
 });
