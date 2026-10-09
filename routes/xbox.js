@@ -57,9 +57,12 @@ router.get('/status', async (req, res) => {
         return sendResponse(res, {
             success: false,
             code: 'SMARTGLASS_CONNECTION_FAILED',
-            message: 'Unable to establish a SmartGlass connection',
+            message: error.message || 'Unknown SmartGlass error',
             data: {
-                ip: process.env.XBOX_IP
+                ip: process.env.XBOX_IP,
+                errorName: error.name || 'Error',
+                errorCode: error.code || null,
+                errorStack: error.stack || null
             },
             status: 503
         });
