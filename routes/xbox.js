@@ -6,7 +6,7 @@ const { getXboxConfig } = require('../services/xbox');
 
 const router = express.Router();
 
-router.get('/status', (req, res) => {
+router.get('/ping', (req, res) => {
     let config;
 
     try {
@@ -38,6 +38,31 @@ router.get('/status', (req, res) => {
             });
         }
     );
+});
+
+router.get('/status', async (req, res) => {
+    try {
+        const status = await getXboxStatus();
+
+        return sendResponse(res, {
+            success: true,
+            code: 'SMARTGLASS_CONNECTED',
+            message: 'SmartGlass connection successful',
+            data: status
+        });
+    } catch (error) {
+        logger.error('SmartGlass connection failed:', error);
+
+        return sendResponse(res, {
+            success: false,
+            code: 'SMARTGLASS_CONNECTION_FAILED',
+            message: 'Unable to establish a SmartGlass connection',
+            data: {
+                ip: process.env.XBOX_IP
+            },
+            status: 503
+        });
+    }
 });
 
 module.exports = router;
