@@ -1,15 +1,21 @@
 {
-"name": "xbox-api",
-"version": "1.0.0",
-"private": true,
-"description": "REST API zur Steuerung einer Xbox One S über SmartGlass",
-"main": "api.js",
-"scripts": {
-"start": "node api.js"
-},
-"dependencies": {
-  "dotenv": "^16.4.7",
-  "express": "^5.1.0",
-  "xbox-smartglass-core-node": "github:OpenXbox/xbox-smartglass-core-node"
-}
+    "name": "xbox-api",
+    "version": "1.0.0",
+    "private": true,
+    "description": "REST API zur Steuerung einer Xbox One S über SmartGlass",
+    "main": "api.js",
+    "scripts": {
+        "start": "node api.js",
+        "pm2:start": "pm2 start api.js --name nubia-xbox-controller",
+        "pm2:stop": "pm2 stop nubia-xbox-controller",
+        "pm2:restart": "pm2 restart nubia-xbox-controller",
+        "pm2:logs": "pm2 logs nubia-xbox-controller",
+        "pm2:status": "pm2 status"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7",
+        "express": "^5.1.0",
+        "pm2": "^7.0.4",
+        "xbox-smartglass-core-node": "github:OpenXbox/xbox-smartglass-core-node"
+    }
 }
