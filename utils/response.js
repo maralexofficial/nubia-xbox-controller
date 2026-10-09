@@ -3,7 +3,7 @@ function sendResponse(
     {
         success = true,
         code = 'OK',
-        message = 'Anfrage erfolgreich',
+        message = 'Request successful',
         data = null,
         status = 200
     } = {}
