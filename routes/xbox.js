@@ -2,35 +2,27 @@ const express = require('express');
 const { execFile } = require('child_process');
 
 const { sendResponse } = require('../utils/response');
+const { getXboxConfig } = require('../services/xbox');
 
 const router = express.Router();
 
-const XBOX_IP = process.env.XBOX_IP;
+router.get('/status', (req, res) => {
+    let config;
 
-router.get('/health', (req, res) => {
-    return sendResponse(res, {
-        success: true,
-        code: 'API_OK',
-        message: 'API is operational',
-        data: {
-            api: 'ok'
-        }
-    });
-});
-
-router.get('/xbox/status', (req, res) => {
-    if (!XBOX_IP) {
+    try {
+        config = getXboxConfig();
+    } catch (error) {
         return sendResponse(res, {
             success: false,
-            code: 'XBOX_IP_MISSING',
-            message: 'Xbox IP address is not configured',
+            code: 'XBOX_CONFIG_ERROR',
+            message: 'Xbox configuration is missing.',
             status: 500
         });
     }
 
     execFile(
         'ping',
-        ['-c', '1', '-W', '2', XBOX_IP],
+        ['-c', '1', '-W', '2', config.ip],
         (err) => {
             return sendResponse(res, {
                 success: true,
@@ -39,7 +31,7 @@ router.get('/xbox/status', (req, res) => {
                     ? 'Xbox is not reachable via ping'
                     : 'Xbox is reachable via ping',
                 data: {
-                    ip: XBOX_IP,
+                    ip: config.ip,
                     reachable: !err,
                     note: 'Network reachability only; this does not confirm console status'
                 }

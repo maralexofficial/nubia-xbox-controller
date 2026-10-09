@@ -13,7 +13,7 @@ function sendResponse(
         code,
         message,
         data,
-        timestamp: new Date().toISOString()
+        timestamp: Date.now()
     });
 }
 
