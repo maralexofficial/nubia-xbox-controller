@@ -12,6 +12,12 @@ app.use(express.json());
 const XBOX_IP = process.env.XBOX_IP;
 const PORT = Number(process.env.PORT) || 8787;
 
+console.log('Konfiguration:', {
+    envDatei: require('path').resolve('.env'),
+    port: PORT,
+    xboxIp: XBOX_IP
+});
+
 // API-Grundfunktion testen
 app.get('/health', (req, res) => {
     return sendResponse(res, {
