@@ -8,7 +8,7 @@
 "start": "node api.js"
 },
 "dependencies": {
-  "dotenv": "^16.4.7"
+  "dotenv": "^16.4.7",
   "express": "^5.1.0",
   "xbox-smartglass-core-node": "github:OpenXbox/xbox-smartglass-core-node"
 }
