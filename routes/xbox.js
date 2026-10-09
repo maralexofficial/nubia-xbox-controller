@@ -1,6 +1,7 @@
 const express = require('express');
 const { execFile } = require('child_process');
 
+const logger = require('../utils/logger');
 const { sendResponse } = require('../utils/response');
 const { getXboxConfig } = require('../services/xbox');
 
